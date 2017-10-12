@@ -4,7 +4,7 @@ import util.TODO
 import java.util.*
 
 fun task41(): Nothing = TODO(
-    """
+        """
         Task41.
         Add a 'partitionTo' function that splits a collection into two collections according to a predicate.
         Uncomment the commented invocations of 'partitionTo' below and make them compile.
@@ -20,11 +20,37 @@ fun task41(): Nothing = TODO(
 )
 
 fun List<String>.partitionWordsAndLines(): Pair<List<String>, List<String>> {
-    task41()
-//    return partitionTo(ArrayList<String>(), ArrayList()) { s -> !s.contains(" ") }
+    return partitionTo(this) { s -> !s.contains(" ") }
+}
+
+fun partitionTo(arrayList: List<String>, any: (String) -> Boolean): Pair<List<String>, List<String>> {
+    val p = mutableListOf<String>()
+    val p2 = mutableListOf<String>()
+
+    arrayList.forEach {
+        if (any(it)) {
+            p.add(it)
+        } else {
+            p2.add(it)
+        }
+    }
+    return Pair(p, p2)
 }
 
 fun Set<Char>.partitionLettersAndOtherSymbols(): Pair<Set<Char>, Set<Char>> {
-    task41()
-//    return partitionTo(HashSet<Char>(), HashSet()) { c -> c in 'a'..'z' || c in 'A'..'Z'}
+    return partitionTo(this) { c -> c in 'a'..'z' || c in 'A'..'Z'}
+}
+
+fun partitionTo(set: Set<Char>, any: (Char) -> Boolean): Pair<Set<Char>, Set<Char>> {
+    val p = mutableSetOf<Char>()
+    val p2 = mutableSetOf<Char>()
+
+    set.forEach {
+        if (any(it)) {
+            p.add(it)
+        } else {
+            p2.add(it)
+        }
+    }
+    return Pair(p, p2)
 }
